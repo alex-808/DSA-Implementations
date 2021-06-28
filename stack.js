@@ -1,6 +1,6 @@
 class Stack {
     constructor() {
-        this.values = []
+        this.values = [];
     }
 
     isEmpty() {
@@ -8,26 +8,20 @@ class Stack {
     }
 
     top() {
-        if(!this.isEmpty()) return this.values[this.values.length - 1]
+        if (!this.isEmpty()) return this.values[this.values.length - 1];
     }
 
     pop() {
-        if(!this.isEmpty()) return this.values.pop();
+        if (!this.isEmpty()) return this.values.pop();
     }
 
     push(val) {
-        this.values.push(val)
+        this.values.push(val);
+    }
+
+    get size() {
+        return this.values.length;
     }
 }
 
-
-
-const myStack = new Stack();
-
-myStack.push(1)
-myStack.push(2)
-myStack.push(3)
-console.log(myStack.values);
-myStack.pop()
-console.log(myStack.values);
-console.log(myStack.top());
+exports.Stack = Stack;
