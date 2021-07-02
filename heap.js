@@ -80,13 +80,9 @@ for (let i = 0; i < 100; i++) {
     myHeap.insert(rand);
 }
 
-console.log(myHeap.size);
-
 for (let i = 0; i < 10; i++) {
     myHeap.extractMax();
 }
-
-console.log(myHeap.size);
 
 for (let i = 2; i < myHeap.size; i++) {
     const parent = myHeap.parent(i);
@@ -95,4 +91,4 @@ for (let i = 2; i < myHeap.size; i++) {
     }
 }
 
-console.log(myHeap.values);
+exports.Heap = Heap;
