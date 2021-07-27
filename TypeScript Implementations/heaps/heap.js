@@ -1,17 +1,19 @@
+// * Notes
 // I forgot heaps are base-1 indexed
+// I had to get to the extractMax/remove part until I realized that I should be keeping track of size
+// I liked learning about an interface's relationship to a class from this
+// I also enjoyed organizing the code in terms of abstraction from highest to lowest which also vaguely echoes different functions' dependencies
 var Heap = /** @class */ (function () {
     function Heap(values) {
         this.values = values || [Number.POSITIVE_INFINITY];
         this.root = 1;
         this.size = this.values.length - 1;
     }
-    // Public methods
     Heap.prototype.insert = function (value) {
         this.values.push(value);
         this._siftUp(this.values.length - 1);
         this.size++;
     };
-    // Remove
     Heap.prototype.remove = function (i) {
         this._swap(i, this.size);
         this.size--;
@@ -26,20 +28,6 @@ var Heap = /** @class */ (function () {
         this.size--;
         this._siftDown(this.root);
         return max;
-    };
-    Heap.prototype._parent = function (i) {
-        return Math.floor(i / 2);
-    };
-    Heap.prototype._leftChild = function (i) {
-        return i * 2;
-    };
-    Heap.prototype._rightChild = function (i) {
-        return i * 2 + 1;
-    };
-    Heap.prototype._swap = function (i, j) {
-        var tmp = this.values[i];
-        this.values[i] = this.values[j];
-        this.values[j] = tmp;
     };
     Heap.prototype._siftUp = function (i) {
         var p = this._parent(i);
@@ -62,6 +50,20 @@ var Heap = /** @class */ (function () {
             this._swap(i, max);
             this._siftDown(max);
         }
+    };
+    Heap.prototype._swap = function (i, j) {
+        var tmp = this.values[i];
+        this.values[i] = this.values[j];
+        this.values[j] = tmp;
+    };
+    Heap.prototype._parent = function (i) {
+        return Math.floor(i / 2);
+    };
+    Heap.prototype._leftChild = function (i) {
+        return i * 2;
+    };
+    Heap.prototype._rightChild = function (i) {
+        return i * 2 + 1;
     };
     return Heap;
 }());

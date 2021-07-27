@@ -4,23 +4,25 @@ interface Heap {
     size: number;
 }
 
+// * Notes
 // I forgot heaps are base-1 indexed
+// I had to get to the extractMax/remove part until I realized that I should be keeping track of size
+// I liked learning about an interface's relationship to a class from this
+// I also enjoyed organizing the code in terms of abstraction from highest to lowest which also vaguely echoes different functions' dependencies
 
 class Heap {
     constructor(values?: Array<number>) {
         this.values = values || [Number.POSITIVE_INFINITY];
         this.root = 1;
+
         this.size = this.values.length - 1;
     }
-
-    // Public methods
 
     insert(value: number): void {
         this.values.push(value);
         this._siftUp(this.values.length - 1);
         this.size++;
     }
-    // Remove
 
     remove(i: number): void {
         this._swap(i, this.size);
@@ -44,23 +46,6 @@ class Heap {
         return max;
     }
 
-    _parent(i: number): number {
-        return Math.floor(i / 2);
-    }
-
-    _leftChild(i: number): number {
-        return i * 2;
-    }
-    _rightChild(i: number): number {
-        return i * 2 + 1;
-    }
-
-    _swap(i: number, j: number): void {
-        const tmp = this.values[i];
-        this.values[i] = this.values[j];
-        this.values[j] = tmp;
-    }
-
     _siftUp(i: number): void {
         const p = this._parent(i);
 
@@ -70,7 +55,6 @@ class Heap {
             this._siftUp(p);
         }
     }
-
     _siftDown(i: number): void {
         const l = this._leftChild(i);
         const r = this._rightChild(i);
@@ -89,6 +73,23 @@ class Heap {
             this._swap(i, max);
             this._siftDown(max);
         }
+    }
+
+    _swap(i: number, j: number): void {
+        const tmp = this.values[i];
+        this.values[i] = this.values[j];
+        this.values[j] = tmp;
+    }
+
+    _parent(i: number): number {
+        return Math.floor(i / 2);
+    }
+
+    _leftChild(i: number): number {
+        return i * 2;
+    }
+    _rightChild(i: number): number {
+        return i * 2 + 1;
     }
 }
 
